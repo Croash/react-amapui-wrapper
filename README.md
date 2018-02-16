@@ -1,0 +1,1 @@
+react-amapui-wrapper
