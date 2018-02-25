@@ -44,7 +44,7 @@ class SimpleInfoWindow extends UIBase {
     })
 
     let input = 
-      '<div class="info"><div class="info-top">sgsgsgsgsg<br/>sgsg<br/>sgsg<br/>sgsg<br/></div>'
+      '<div class="infoWin"><div class="infoWin-top">sgsgsgsgsg<br/>sgsg<br/>sgsg<br/>sgsg<br/></div>'
     this.simpleInfoWindow.setContent(input)
 
     //显示在map上

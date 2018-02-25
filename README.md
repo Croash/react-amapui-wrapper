@@ -16,9 +16,9 @@ import { Wrapper, DistrictExplorer } from 'react-amapui-wrapper'
 
 class MapUIComponent extends Component {
   render() {
-    return <Map 
-      <Wrapper 
-        <DistrictExplorer 
+    return <Map>
+      <Wrapper>
+        <DistrictExplorer> 
           events = {} 
           eventSupport = {} 
           instanceName = {'DistrictExplorer'}
