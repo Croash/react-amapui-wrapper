@@ -38,7 +38,12 @@ class MapUIWrap extends Component {
 
   renderChildren() {
     const childrenWithProps = Children.map(this.props.children,
-      (child) => React.cloneElement(child, { ...this.props, __amapui__: this.AMapUI }))
+      (child) => { 
+        if(child!=null)
+          return React.cloneElement(child, { ...this.props, __amapui__: this.AMapUI })
+        else return null
+        } 
+      )
     return childrenWithProps
   }
 
