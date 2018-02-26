@@ -50,11 +50,6 @@ div.infoWin-bottom img {
   z-index: 104;
 }
 
-span {
-  margin-left: 5px;
-  font-size: 11px;
-}
-
 .infoWin-middle img {
   float: left;
   margin-right: 6px;

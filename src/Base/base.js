@@ -33,7 +33,7 @@ class Base extends Component {
   }
   
   // Customize updateProps, decide what'll happen when props change
-  updateProps(nextProps,thisProps) {
+  updateMapProps(nextProps,thisProps) {
   }
 
   componentWillMount() {
