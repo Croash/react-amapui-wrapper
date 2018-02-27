@@ -18,9 +18,10 @@ class SimpleMarker extends UIBase {
       return new Promise((resolve) => {
         this.amapui.load(['ui/overlay/SimpleMarker'], (InstanceInit) => {
 
+
+          this.initPage(InstanceInit)
           const events = this.exposeInstance(this.props)
           events && this.bindEvents(events)
-          this.initPage(InstanceInit)
           resolve(this[this.instanceName])
         })
       })
