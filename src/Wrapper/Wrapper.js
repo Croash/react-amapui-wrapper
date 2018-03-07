@@ -9,10 +9,6 @@ class MapUIWrap extends Component {
       mapUILoaded: false
     }
 
-    // if (typeof window !== 'undefined') {
-    //   this.pluginMapUI = {}
-    //   this.loader = new apiLoader('f97efc35164149d0c0f299e7a8adb3d2').load()
-    // }
   }
 
   componentDidMount() {
@@ -20,11 +16,9 @@ class MapUIWrap extends Component {
   }
   
   componentDidUpdate() {
-    // this.loadMap()
   }
 
   loadMap() {
-    // this.loader.then(() => {
     this.AMapUI = window.AMapUI
     if (this.AMapUI!=undefined) {
       console.log('Loading AMapUI finished...')
@@ -33,7 +27,6 @@ class MapUIWrap extends Component {
       })
     }
     else console.error('Load AMapUI first plz..')
-    // })
   }
 
   renderChildren() {

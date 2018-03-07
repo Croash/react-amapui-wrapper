@@ -16,9 +16,10 @@ class Base extends Component {
         this.amapui = props.__amapui__
         this.element = props.__ele__//this.map.getContainer()
         this.instanceName = props.instanceName
+        this.initialInstance()
       }
     }
-    this.initialInstance()
+
   }
 
   shouldComponentUpdate() {
