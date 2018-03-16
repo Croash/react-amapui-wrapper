@@ -7,6 +7,12 @@ class DistrictExplorer extends UIBase {
     this.instanceName = 'districtExplorer'
   }
 
+  componentWillUnmount() {
+    this[this.instanceName].clearAreaNodeCache()
+    console.log(this.instanceName + ' Unmount')
+    delete this[this.instanceName]
+  }
+
   updateProps(nextProps,thisProps) {
     
   }
