@@ -21,14 +21,14 @@ import { Wrapper, DistrictExplorer } from 'react-amapui-wrapper'
 class MapUIComponent extends Component {
   render() {
     return (<Map>
-      <Wrapper>
+      <Wrap>
         <DistrictExplorer>
           events = {{}}
           eventSupport = {true}
           instanceName = {'DistrictExplorer'}
-        />
-      />
-    />)
+        </DistrictExplorer>
+      </Wrap>
+    </Map>)
   }
 }
 
