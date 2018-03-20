@@ -74,6 +74,8 @@ class newMarker extends SimpleMarker {
 
 ## 相关配置项
 
+1. `eventSupport`为事件支持，true为支持事件，false为不支持，默认为false
+
 1. `events`为事件配置项，事件绑定方式与[react-amap中绑定方式](https://github.com/ElemeFE/react-amap/blob/master/components/about.md)相同
 
 2. `instanceName`为从高德地图中load的地图元素，具体填入内容参照高德地图AMapUI。
@@ -86,11 +88,8 @@ class newMarker extends SimpleMarker {
 import React,{ Component } from 'react'
 import { Base } from 'react-amapui-wrapper'
 
-// 自定义组件
+// 自定义组件, 此为自定义DistrictExplorer的过程
 class newCp extends Base {
-// updateProps 用于更新 props, 可自定义props改变
-  updateMapProps(nextProps,thisProps) {
-  }
 
 // initialInstance 用于初始化组件, 可自定义如何初始化组件
   initialInstance() {
