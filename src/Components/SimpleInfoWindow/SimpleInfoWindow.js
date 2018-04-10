@@ -53,6 +53,12 @@ class SimpleInfoWindow extends UIBase {
   }
   // render accoding to areaNode
 
+  componentWillUnmount() {
+    this.close()
+    console.log(`${this.instanceName} unmount`)
+    delete this[this.instanceName]
+  }
+
 }
 
 export default SimpleInfoWindow

@@ -50,6 +50,12 @@ class AwesomeMarker extends UIBase {
     })
   }
 
+  componentWillUnmount() {
+    console.log(`${this.instanceName} unmount`)
+    this[this.instanceName].setMap(null)
+    delete(this[this.instanceName])
+  }
+
 }
 
 export default AwesomeMarker

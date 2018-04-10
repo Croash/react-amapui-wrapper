@@ -59,6 +59,12 @@ class DistrictCluster extends UIBase {
   }
   // render accoding to areaNode
 
+  componentWillUnmount() {
+    console.log(`${this.instanceName} unmount`)
+    this[this.instanceName].hide()
+    delete(this[this.instanceName])
+  }
+
 }
 
 export default DistrictCluster
