@@ -41,15 +41,15 @@ class Base extends Component {
     console.log(`mount ${this.instanceName}`)
   }
 
-  componentWillUnmount() {
-    /*
-     * if districtExplorer has hide function,
-     * use it when unmount this component
-     */
-    this[this.instanceName].hide()
-    console.log(`${this.instanceName} Unmount`)
-    delete this[this.instanceName]
-  }
+  // componentWillUnmount() {
+  //   /*
+  //    * if districtExplorer has hide function,
+  //    * use it when unmount this component
+  //    */
+  //   this[this.instanceName].hide()
+  //   console.log(`${this.instanceName} Unmount`)
+  //   delete this[this.instanceName]
+  // }
 
   //can be change to ( events, objName ) 
   //                => {...  this[objName].on(evName, events[evName])}
