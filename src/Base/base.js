@@ -9,7 +9,7 @@ class Base extends Component {
       if (!props.__map__&&!props.__amapui__) {
         throw new Error('this component has to be a child of Map and AMapUI component')
       }
-      else if(!props.instanceName)
+      else if(props.instanceName==undefined)
         throw new Error('the component has to have a instanceName') 
       else {
         this.map = props.__map__
