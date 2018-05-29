@@ -1,6 +1,6 @@
 {
   "name": "react-amapui-wrapper",
-  "version": "0.0.16",
+  "version": "1.0.1",
   "description": "a wrapper of amapui for react-amap",
   "main": "./lib/index.js",
   "scripts": {
