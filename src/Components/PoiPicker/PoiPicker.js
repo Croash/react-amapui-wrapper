@@ -3,7 +3,8 @@ import UIBase from '../../Base'
 
 class PoiPicker extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'poiPicker'
   }
 
@@ -31,13 +32,14 @@ class PoiPicker extends UIBase {
   }
 
   initPage(PoiPicker,$) {
-
     this[this.instanceName] = new PoiPicker({
       input: 'pickerInput' //输入框id
     })
-
   }
 
+  componentWillUnmount() {
+    //destroy later
+  }
 }
 
 export default PoiPicker

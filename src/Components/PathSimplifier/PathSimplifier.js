@@ -3,7 +3,8 @@ import UIBase from '../../Base'
 
 class PathSimplifier extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'pathSimplifier'
   }
 

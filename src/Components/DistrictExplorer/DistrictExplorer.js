@@ -3,14 +3,18 @@ import UIBase from '../../Base'
 
 class DistrictExplorer extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'districtExplorer'
   }
 
   componentWillUnmount() {
-    this[this.instanceName].clearAreaNodeCache()
-    console.log(this.instanceName + ' Unmount')
-    delete this[this.instanceName]
+    if (this[this.instanceName]) {
+      this[this.instanceName].clearAreaNodeCache()
+      console.log(this.instanceName + ' Unmount')
+      delete this[this.instanceName]      
+    }
+
   }
 
   updateProps(nextProps,thisProps) {

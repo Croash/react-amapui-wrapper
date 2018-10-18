@@ -15,12 +15,13 @@
 ```JavaScript
 import React,{ Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Map } from 'react-amap'
+import { Map as Amap } from 'react-amap'
 import { Wrapper, DistrictExplorer } from 'react-amapui-wrapper'
 
 class MapUIComponent extends Component {
   render() {
-    return (<Map>
+    const useAMapUI = true
+    return (<Amap useAMapUI = {useAMapUI}>
       <Wrap>
         <DistrictExplorer>
           events = {{}}
@@ -28,7 +29,7 @@ class MapUIComponent extends Component {
           instanceName = {'DistrictExplorer'}
         </DistrictExplorer>
       </Wrap>
-    </Map>)
+    </Amap>)
   }
 }
 
@@ -37,6 +38,7 @@ ReactDOM.render(
   document.querySelector('#app')
 )
 ```
+需要注意的是：引入AmapUi需要输入useAmapUi的参数，如上，否则会在控制台中出现import AmapUi plz...的console
 
 ---
 

@@ -3,7 +3,8 @@ import UIBase from '../../Base'
 
 class PointSimplifier extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'pointSimplifier'
   }
 
@@ -69,7 +70,11 @@ class PointSimplifier extends UIBase {
       })
     }
     return data
-}
+  }
+
+  componentWillUnmount() {
+    // destroy later
+  }
 
   // render accoding to areaNode
 

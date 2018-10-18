@@ -3,12 +3,12 @@ import UIBase from '../../Base'
 
 class PositionPicker extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'positionPicker'
   }
   
   initialInstance() {
-    
     const { eventSupport=false } = this.props
     if (this[this.instanceName]) {
       return new Promise((resolve) => {
@@ -33,8 +33,6 @@ class PositionPicker extends UIBase {
   // render AllPage
 
   initPage(PositionPicker,$) {
-
-    console.log($)
     this[this.instanceName] = new PositionPicker({
       eventSupport: true,
       mode:'dragMap',//设定为拖拽地图模式，可选'dragMap'、'dragMarker'，默认为'dragMap'
@@ -45,12 +43,12 @@ class PositionPicker extends UIBase {
         ancher:[24,40],//锚点的位置，即被size缩放之后，图片的什么位置作为选中的位置
       }
     })
-
     this.positionPicker.start(this.map.getBounds().getSouthWest())
-    
   }
   // render accoding to areaNode
-
+  componentWillUnmount() {
+    //destroy later
+  }
 }
 
 export default PositionPicker

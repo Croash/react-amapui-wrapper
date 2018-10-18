@@ -3,7 +3,8 @@ import UIBase from '../../Base'
 
 class AwesomeMarker extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'awesomeMarker'
   }
 
@@ -51,11 +52,12 @@ class AwesomeMarker extends UIBase {
   }
 
   componentWillUnmount() {
-    console.log(`${this.instanceName} unmount`)
-    this[this.instanceName].setMap(null)
-    delete(this[this.instanceName])
+    if (this[this.instanceName]) {
+      console.log(`${this.instanceName} unmount`)
+      this[this.instanceName].setMap(null)
+      delete(this[this.instanceName])      
+    }
   }
-
 }
 
 export default AwesomeMarker

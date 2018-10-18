@@ -3,7 +3,8 @@ import UIBase from '../../Base'
 
 class DistrictCluster extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'districtCluster'
   }
 
@@ -60,9 +61,12 @@ class DistrictCluster extends UIBase {
   // render accoding to areaNode
 
   componentWillUnmount() {
-    console.log(`${this.instanceName} unmount`)
-    this[this.instanceName].hide()
-    delete(this[this.instanceName])
+    if (this[this.instanceName]) {
+      console.log(`${this.instanceName} unmount`)
+      this[this.instanceName].hide()
+      delete(this[this.instanceName])
+    }
+
   }
 
 }

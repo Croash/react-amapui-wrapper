@@ -4,7 +4,8 @@ import './style.css'
 
 class SimpleInfoWindow extends UIBase {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     this.instanceName = 'simpleInfoWindow'
   }
 
@@ -54,9 +55,12 @@ class SimpleInfoWindow extends UIBase {
   // render accoding to areaNode
 
   componentWillUnmount() {
-    this.close()
-    console.log(`${this.instanceName} unmount`)
-    delete this[this.instanceName]
+    if(this[this.instanceName]) {
+      this.close()
+      console.log(`${this.instanceName} unmount`)
+      delete this[this.instanceName]      
+    }
+
   }
 
 }
