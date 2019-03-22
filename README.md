@@ -21,15 +21,20 @@ import { Wrapper, DistrictExplorer } from 'react-amapui-wrapper'
 class MapUIComponent extends Component {
   render() {
     const useAMapUI = true
-    return (<Amap useAMapUI = {useAMapUI}>
-      <Wrap>
-        <DistrictExplorer>
-          events = {{}}
-          eventSupport = {true}
-          instanceName = {'DistrictExplorer'}
-        </DistrictExplorer>
-      </Wrap>
-    </Amap>)
+    return (
+    <div style={{ width:'600px', height:'400px' }}>
+      <Amap useAMapUI = {useAMapUI}>
+        <Wrapper>
+          <DistrictExplorer
+            events = {{}}
+            initialAdcode={100000}
+            eventSupport = {true}
+            instanceName = {'DistrictExplorer'}
+          />
+        </Wrapper>
+      </Amap>
+     </div> 
+    )
   }
 }
 
