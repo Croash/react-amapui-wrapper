@@ -31,9 +31,9 @@
     "es6-promise": "^4.2.4"
   },
   "directories": {
-    "lib":"lib"
+    "lib": "lib"
   },
-  "files":[
+  "files": [
     "lib",
     "package.json"
   ]
