@@ -8,12 +8,12 @@ class SimpleMarker extends UIBase {
     this.instanceName = 'simpleMarker'
   }
 
-  initialInstance() {
+  initialInstance = () => {
     
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
@@ -21,9 +21,9 @@ class SimpleMarker extends UIBase {
 
 
           this.initPage(InstanceInit)
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -33,7 +33,7 @@ class SimpleMarker extends UIBase {
 
   initPage(InstanceInit) {
 
-    this[this.instanceName] = new InstanceInit({
+    this.instance = new InstanceInit({
       //前景文字
       iconLabel: 'circleMar',
 
@@ -52,14 +52,16 @@ class SimpleMarker extends UIBase {
   }
 
   componentWillUnmount() {
-    if(this[this.instanceName]) {
+    if(this.instance) {
       console.log(`${this.instanceName} unmount`)
-      this[this.instanceName].setMap(null)
-      delete this[this.instanceName]      
+      this.close()
+      delete this.instance      
     }
-
   }
 
+  close = () => {
+    this.instance.setMap(null)
+  }
 }
 
 export default SimpleMarker

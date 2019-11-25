@@ -8,11 +8,11 @@ class AwesomeMarker extends UIBase {
     this.instanceName = 'awesomeMarker'
   }
 
-  initialInstance() {
+  initialInstance = () => {
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
@@ -20,9 +20,9 @@ class AwesomeMarker extends UIBase {
 
           this.initPage(InstanceInit)
 
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -31,7 +31,7 @@ class AwesomeMarker extends UIBase {
   // render AllPage
 
   initPage(InstanceInit) {
-    this[this.instanceName] = new InstanceInit({
+    this.instance = new InstanceInit({
       //前景文字
       awesomeIcon: 'arrows', //可用的icons参见： http://fontawesome.io/icons/
 
@@ -52,10 +52,10 @@ class AwesomeMarker extends UIBase {
   }
 
   componentWillUnmount() {
-    if (this[this.instanceName]) {
+    if (this.instance) {
       console.log(`${this.instanceName} unmount`)
-      this[this.instanceName].setMap(null)
-      delete(this[this.instanceName])      
+      this.instance.setMap(null)
+      delete(this.instance)      
     }
   }
 }

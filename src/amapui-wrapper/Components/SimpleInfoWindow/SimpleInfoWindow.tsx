@@ -9,12 +9,20 @@ class SimpleInfoWindow extends UIBase {
     this.instanceName = 'simpleInfoWindow'
   }
 
-  initialInstance() {
+  componentWillUnmount() {
+    if(this.instance) {
+      this.close()
+      console.log(`${this.instanceName} unmount`)
+      delete this.instance      
+    }
+  }
+
+  initialInstance = () => {
     
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
@@ -22,11 +30,11 @@ class SimpleInfoWindow extends UIBase {
         this.amapui.load(['ui/overlay/SimpleInfoWindow','lib/$'], (SimpleInfoWindow,$) => {
           
           this.initPage(SimpleInfoWindow,$)
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
 
 
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -36,7 +44,7 @@ class SimpleInfoWindow extends UIBase {
 
   initPage(SimpleInfoWindow,$) {
 
-    this[this.instanceName] = new SimpleInfoWindow({
+    this.instance = new SimpleInfoWindow({
       eventSupport: true,
       map:this.map,//依赖地图对象
       infoTitle: '<strong>这里是标题</strong>',
@@ -46,23 +54,16 @@ class SimpleInfoWindow extends UIBase {
 
     let input = 
       '<div class="infoWin"><div class="infoWin-top">sgsgsgsgsg<br/>sgsg<br/>sgsg<br/>sgsg<br/></div>'
-    this.simpleInfoWindow.setContent(input)
+    this.instance.setContent(input)
 
     //显示在map上
-    this[this.instanceName].open(this.map, this.map.getCenter())
+    this.instance.open(this.map, this.map.getCenter())
     
   }
   // render accoding to areaNode
 
-  componentWillUnmount() {
-    if(this[this.instanceName]) {
-      this.close()
-      console.log(`${this.instanceName} unmount`)
-      delete this[this.instanceName]      
-    }
-
-  }
-
+  close = () => {}
+  
 }
 
 export default SimpleInfoWindow

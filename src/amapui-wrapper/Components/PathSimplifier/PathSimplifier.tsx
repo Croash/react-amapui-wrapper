@@ -2,25 +2,26 @@ import React,{ Component } from 'react'
 import UIBase from '../../Base'
 
 class PathSimplifier extends UIBase {
+  pathSimplifier
 
   constructor(props) {
     super(props)
     this.instanceName = 'pathSimplifier'
   }
 
-  initialInstance() {
+  initialInstance = () => {
     
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
 
         this.amapui.load(['ui/misc/PathSimplifier'], (PathSimplifier) => {
           
-          this[this.instanceName] = new PathSimplifier({
+          this.instance = new PathSimplifier({
             zIndex: 100,
             map: this.map, //所属的地图实例
             getPath: function(pathData, pathIndex) {
@@ -46,11 +47,11 @@ class PathSimplifier extends UIBase {
             }
           })
 
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
 
           this.initPage(PathSimplifier)
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -59,8 +60,7 @@ class PathSimplifier extends UIBase {
   // render AllPage
 
   initPage(PathSimplifier) {
-
-    this.pathSimplifier.setData([{
+    this.instance.setData([{
       name: '轨迹0',
       path: [
         [100.340417, 27.376994],
@@ -75,7 +75,7 @@ class PathSimplifier extends UIBase {
     }])
 
     //创建一个巡航器
-    let navg0 = this.pathSimplifier.createPathNavigator(0, //关联第1条轨迹
+    let navg0 = this.instance.createPathNavigator(0, //关联第1条轨迹
       {
         loop: true, //循环播放
         speed: 1000000
@@ -88,8 +88,8 @@ class PathSimplifier extends UIBase {
 
   componentWillUnmount() {
     console.log(`${this.instanceName} unmount`)
-    this[this.instanceName].hide()
-    delete(this[this.instanceName])
+    this.instance.hide()
+    delete(this.instance)
   }
 
 }

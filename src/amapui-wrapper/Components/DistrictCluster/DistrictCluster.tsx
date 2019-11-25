@@ -8,29 +8,29 @@ class DistrictCluster extends UIBase {
     this.instanceName = 'districtCluster'
   }
 
-  initialInstance() {
+  initialInstance = () => {
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
 
         this.amapui.load(['ui/geo/DistrictCluster'], (DistrictCluster) => {
           
-          this[this.instanceName] = new DistrictCluster({
+          this.instance = new DistrictCluster({
             map: this.map, //所属的地图实例
             getPosition: function(item) {
               return item.position
             }
           })
 
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
 
           this.initPage(DistrictCluster)
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -42,7 +42,7 @@ class DistrictCluster extends UIBase {
 
     var data = this.createPoints(this.map.getCenter(), 100000);
     //设置数据
-    this[this.instanceName].setData(data);
+    this.instance.setData(data);
 
   }
 
@@ -61,10 +61,10 @@ class DistrictCluster extends UIBase {
   // render accoding to areaNode
 
   componentWillUnmount() {
-    if (this[this.instanceName]) {
+    if (this.instance) {
       console.log(`${this.instanceName} unmount`)
-      this[this.instanceName].hide()
-      delete(this[this.instanceName])
+      this.instance.hide()
+      delete(this.instance)
     }
 
   }

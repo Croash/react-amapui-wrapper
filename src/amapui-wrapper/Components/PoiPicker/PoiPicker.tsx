@@ -8,12 +8,12 @@ class PoiPicker extends UIBase {
     this.instanceName = 'poiPicker'
   }
 
-  initialInstance() {
+  initialInstance = () => {
     
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
@@ -21,18 +21,18 @@ class PoiPicker extends UIBase {
         this.amapui.load(['ui/misc/PoiPicker','lib/$'], (PoiPicker,$) => {
           
           this.initPage(PoiPicker,$)
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
 
 
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
   }
 
   initPage(PoiPicker,$) {
-    this[this.instanceName] = new PoiPicker({
+    this.instance = new PoiPicker({
       input: 'pickerInput' //输入框id
     })
   }

@@ -8,21 +8,21 @@ class PointSimplifier extends UIBase {
     this.instanceName = 'pointSimplifier'
   }
 
-  initialInstance() {
+  initialInstance = () => {
     
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
         this.amapui.load(['ui/misc/PointSimplifier'], (PointSimplifier) => {
 
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
           this.initPage()
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -33,7 +33,7 @@ class PointSimplifier extends UIBase {
   initPage() {
     let data = this.createPoints(this.map.getCenter(), 100000)
 
-    this[this.instanceName] = new PointSimplifier({
+    this.instance = new PointSimplifier({
       map: this.map, //关联的map
       compareDataItem: function(a, b, aIndex, bIndex) {
         //数据源中靠后的元素优先，index大的排到前面去
@@ -55,7 +55,7 @@ class PointSimplifier extends UIBase {
       }
     })
     //设置数据源，data需要是一个数组
-    this.pointSimplifier.setData(data)
+    this.instance.setData(data)
 
   }
 

@@ -1,7 +1,27 @@
 import React,{ Component } from 'react'
-import isFun from '../utils/isFun'
+import { isFun } from '../utils/index'
 
-class Base extends Component {
+export interface IEvents {
+  created?: Function
+  [propName: string]: any
+}
+
+export interface IProps {
+  __map__: any
+  __amapui__: any
+  __ele__: any
+  instanceName?: String
+  events?: IEvents
+  [propName: string]: any
+}
+
+class Base extends Component<IProps, {}> {
+  map: any
+  amapui: any
+  element: any
+  instance: any
+  instanceName: String
+  props: IProps
 
   constructor(props) {
     super(props)
@@ -17,7 +37,6 @@ class Base extends Component {
         this.initialInstance()
       }
     }
-
   }
 
   shouldComponentUpdate() {
@@ -26,7 +45,7 @@ class Base extends Component {
 
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       this.updateMapProps(prevProps, nextProps)
     }
   }
@@ -38,19 +57,6 @@ class Base extends Component {
   componentWillMount() {
     console.log(`mount ${this.instanceName}`)
   }
-
-  // componentWillUnmount() {
-  //   /*
-  //    * if districtExplorer has hide function,
-  //    * use it when unmount this component
-  //    */
-  //   this[this.instanceName].hide()
-  //   console.log(`${this.instanceName} Unmount`)
-  //   delete this[this.instanceName]
-  // }
-
-  //can be change to ( events, objName ) 
-  //                => {...  this[objName].on(evName, events[evName])}
 
   /*
    *   events
@@ -68,30 +74,26 @@ class Base extends Component {
    * 
    */
   
-  bindEvents (events,mapInstance) {
+  bindEvents = (events) => {
     const list = Object.keys(events)
     list.length && list.forEach((evName) => {
-      this[this.instanceName].on(evName, 
+      this.instance.on(evName, 
         events[evName]
-        // (params)=>{
-        //   events[evName](params)
-        // }
       )
     })
   }
 
-  exposeInstance() {
-
+  exposeInstance = () => {
     if ('events' in this.props) {
       const events = this.props.events || {}
       if (isFun(events.created)) {
-        events.created(this[this.instanceName],this.instanceName)
+        const instanceName = this.instanceName
+        events.created(this.instance,instanceName)
         delete events.created
       }
       return events
     }
     return false
-
   }
 
   render() {
@@ -99,7 +101,8 @@ class Base extends Component {
   }
 
   // Customize component initialization
-  initialInstance() {
+  initialInstance = () => {
+    console.log('rewrite ur initialInstance, plz')
   }
 
 }

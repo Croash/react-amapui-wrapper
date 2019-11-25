@@ -8,11 +8,11 @@ class PositionPicker extends UIBase {
     this.instanceName = 'positionPicker'
   }
   
-  initialInstance() {
+  initialInstance = () => {
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
@@ -20,11 +20,11 @@ class PositionPicker extends UIBase {
         this.amapui.load(['ui/misc/PositionPicker','lib/$'], (PositionPicker,$) => {
           
           this.initPage(PositionPicker,$)
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
 
 
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -33,7 +33,7 @@ class PositionPicker extends UIBase {
   // render AllPage
 
   initPage(PositionPicker,$) {
-    this[this.instanceName] = new PositionPicker({
+    this.instance = new PositionPicker({
       eventSupport: true,
       mode:'dragMap',//设定为拖拽地图模式，可选'dragMap'、'dragMarker'，默认为'dragMap'
       map:this.map,//依赖地图对象
@@ -43,7 +43,7 @@ class PositionPicker extends UIBase {
         ancher:[24,40],//锚点的位置，即被size缩放之后，图片的什么位置作为选中的位置
       }
     })
-    this.positionPicker.start(this.map.getBounds().getSouthWest())
+    this.instance.start(this.map.getBounds().getSouthWest())
   }
   // render accoding to areaNode
   componentWillUnmount() {

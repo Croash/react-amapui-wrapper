@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import UIBase from '../../Base'
 
 class DistrictExplorer extends UIBase {
+  currentAreaNode: Number | String
 
   constructor(props) {
     super(props)
@@ -9,10 +10,10 @@ class DistrictExplorer extends UIBase {
   }
 
   componentWillUnmount() {
-    if (this[this.instanceName]) {
-      this[this.instanceName].clearAreaNodeCache()
+    if (this.instance) {
+      this.instance.clearAreaNodeCache()
       console.log(this.instanceName + ' Unmount')
-      delete this[this.instanceName]      
+      delete this.instance      
     }
 
   }
@@ -21,24 +22,24 @@ class DistrictExplorer extends UIBase {
     
   }
   
-  initialInstance() {
+  initialInstance = () => {
     const { eventSupport=false } = this.props
-    if (this[this.instanceName]) {
+    if (this.instance) {
       return new Promise((resolve) => {
-        resolve(this[this.instanceName])
+        resolve(this.instance)
       })
     } else {
       return new Promise((resolve) => {
         this.amapui.load(['ui/geo/DistrictExplorer'], (DistrictExplorer) => {
 
-          this[this.instanceName] = new DistrictExplorer({
+          this.instance = new DistrictExplorer({
             eventSupport: eventSupport,
             map: this.map //关联的地图实例
           })
-          const events = this.exposeInstance(this.props)
+          const events = this.exposeInstance()
           events && this.bindEvents(events)
           this.initPage()
-          resolve(this[this.instanceName])
+          resolve(this.instance)
         })
       })
     }
@@ -49,27 +50,27 @@ class DistrictExplorer extends UIBase {
   initPage() {
     let adcode = '110000' //全国的区划编码
     this.currentAreaNode = adcode
-    this[this.instanceName].loadAreaNode(this.props.initialAdcode, (error, areaNode)=> {
+    this.instance.loadAreaNode(this.props.initialAdcode, (error, areaNode)=> {
  
       if (error) {
         console.error(error)
         return
       }
       //绘制载入的区划节点
-      this.renderAreaNode(this[this.instanceName], areaNode)
+      this.renderAreaNode(this.instance, areaNode)
     })
   }
 
   // render accoding to areaNode
-  renderAreaNode(districtExplorer, areaNode, parentColors, childColors) {
+  renderAreaNode = (districtExplorer, areaNode) => {
     // 清除已有的绘制内容
-    this[this.instanceName].clearFeaturePolygons()
+    this.instance.clearFeaturePolygons()
   
     //just some colors
     var colors = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099', '#0099c6', '#dd4477', '#66aa00']
   
     //renderSubFeatures
-    this[this.instanceName].renderSubFeatures(areaNode, (feature, i) => {
+    this.instance.renderSubFeatures(areaNode, (feature, i) => {
       var fillColor = colors[i % colors.length]
       var strokeColor = colors[colors.length - 1 - i % colors.length]
       return {
@@ -84,7 +85,7 @@ class DistrictExplorer extends UIBase {
     })
   
     //绘制父级区划，仅用黑色描边
-    this[this.instanceName].renderParentFeature(areaNode, {
+    this.instance.renderParentFeature(areaNode, {
       cursor: 'default',
       bubble: true,
       strokeColor: 'black', //线颜色
@@ -93,11 +94,11 @@ class DistrictExplorer extends UIBase {
     })
   
     //更新地图视野以适合区划面
-    this.map.setFitView(this[this.instanceName].getAllFeaturePolygons())
+    this.map.setFitView(this.instance.getAllFeaturePolygons())
   }
 
   loadAreaNode(adcode, callback) {
-    this[this.instanceName].loadAreaNode(adcode, (error, areaNode) => {
+    this.instance.loadAreaNode(adcode, (error, areaNode) => {
       if (error) {
         if (callback) {
           callback(error)
