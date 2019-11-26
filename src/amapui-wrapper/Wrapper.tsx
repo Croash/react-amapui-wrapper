@@ -1,7 +1,7 @@
-import React,{ Component, Children } from 'react'
+import React,{ Component, Children, Fragment } from 'react'
 
 const Wrapper = props => {
-  const renderChildren = () => {
+  const RenderChildren = () => {
     const childrenWithProps = Children.map(props.children,
       (child) => { 
           return React.cloneElement(child, {})
@@ -9,7 +9,7 @@ const Wrapper = props => {
       )
     return childrenWithProps
   }
-  return (<>{renderChildren()}</>)
+  return (<Fragment>{RenderChildren()}</Fragment>)
 }
 
 export default Wrapper

@@ -52,7 +52,7 @@ module.exports = {
     // hot: true
   },
   entry: {
-    app: "./src/index.js", //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
+    app: "./src/index.ts", //入口文件，若不配置webpack4将自动查找src目录下的index.js文件
     vendor: [
       'react',
       'react-dom',
