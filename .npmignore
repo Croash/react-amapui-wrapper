@@ -1,0 +1,10 @@
+node_modules
+publish
+public
+.vscode
+deploy
+src
+src/*-components.js
+src/*-setters.js
+.DS_Store
+dist
