@@ -1,10 +1,21 @@
+# files
 node_modules
 publish
 public
-.vscode
-deploy
-src
-src/*-components.js
-src/*-setters.js
-.DS_Store
 dist
+src
+
+# config
+.vscode
+webpack-config
+*.config.js
+deploy
+
+# src/*-components.js
+# src/*-setters.js
+
+# other
+.DS_Store
+.html
+tsconfig.json
+*.md
