@@ -23,7 +23,7 @@ class Base extends Component<IProps, {}> {
   instanceName: String
   props: IProps
 
-  constructor(props) {
+  constructor(props: IProps) {
     super(props)
     if (typeof window !== 'undefined') {
       if (!props.__map__&&!props.__amapui__) {
@@ -74,7 +74,7 @@ class Base extends Component<IProps, {}> {
    * 
    */
   
-  bindEvents = (events) => {
+  bindEvents : (events: IEvents) => void = (events) => {
     const list = Object.keys(events)
     list.length && list.forEach((evName) => {
       this.instance.on(evName, 
@@ -83,7 +83,7 @@ class Base extends Component<IProps, {}> {
     })
   }
 
-  exposeInstance = () => {
+  exposeInstance : () => (IEvents|Boolean) = () => {
     if ('events' in this.props) {
       const events = this.props.events || {}
       if (isFun(events.created)) {
@@ -101,7 +101,7 @@ class Base extends Component<IProps, {}> {
   }
 
   // Customize component initialization
-  initialInstance = () => {
+  initialInstance : () => void = () => {
     console.log('rewrite ur initialInstance, plz')
   }
 
